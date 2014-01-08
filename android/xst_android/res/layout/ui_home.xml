@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout 
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height">
+        <Button 
+            android:id="@+id/btn_help"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/title_bar_height"
+            android:layout_height="@dimen/title_bar_height"
+            android:background="@drawable/ic_error"/>
+        
+        <Button 
+            android:id="@+id/btn_major"
+            android:layout_toRightOf="@id/btn_help"
+            android:layout_toLeftOf="@+id/btn_search"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:text="2010-信息管理与信息系统"
+            android:onClick="selMajor"/>
+        
+        <Button 
+            android:id="@+id/btn_search"
+            android:layout_width="@dimen/title_bar_height"
+            android:layout_height="@dimen/title_bar_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_launcher"/>
+    </RelativeLayout>
+
+    <LinearLayout 
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rl1">
+        <Button 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="一键卖书"/>
+        <Button 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="一键搜书"/>
+    </LinearLayout>
+	<ListView 
+        android:id="@+id/lv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll1">
+    </ListView>
+</RelativeLayout>

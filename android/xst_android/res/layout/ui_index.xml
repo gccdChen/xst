@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg" >
+
+    <cn.scau.zzzd.xst.widget.WeViewPager
+        android:id="@+id/vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_1"
+        android:layout_gravity="center"
+        android:flipInterval="10"
+        android:persistentDrawingCache="animation" />
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/sel_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FF333333"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/index"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_error"
+                android:drawablePadding="5dp"
+                android:button="@null"
+                android:text="首页"
+                android:gravity="bottom|center_horizontal" />
+
+            <RadioButton
+                android:id="@+id/info"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bottom_bar_height"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_launcher"
+                android:button="@null" 
+                android:text="首页"
+                android:gravity="bottom|center_horizontal" />
+
+            <RadioButton
+                android:id="@+id/act"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bottom_bar_height"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_launcher"
+                android:button="@null" 
+                android:text="首页"
+                android:gravity="bottom|center_horizontal" />
+
+            <RadioButton
+                android:id="@+id/vip"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bottom_bar_height"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_launcher"
+                android:button="@null"
+                android:text="首页"
+                android:gravity="bottom|center_horizontal" />
+        </RadioGroup>
+    </LinearLayout>
+
+</RelativeLayout>
