@@ -1,15 +1,17 @@
 package cn.scau.scaubook.entity;
 
+import org.nutz.dao.entity.annotation.ColDefine;
+import org.nutz.dao.entity.annotation.ColType;
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.One;
 import org.nutz.dao.entity.annotation.Table;
 /**
- * 发布信息项
+ * 销售项
  * @author gccd
  *
  */
-@Table("t_idleitem")
-public class Idleitem {
+@Table("t_sellitem")
+public class Sellitem {
     @Id
     private long id;
     private long bookid;
@@ -24,9 +26,10 @@ public class Idleitem {
      */
     private String note;
     /**
-     * 照片数
+     * 照片路径 作为保留
      */
-    private int imagenum;
+    @ColDefine(type=ColType.TEXT)
+    private String imagePaths;
     public long getId() {
         return id;
     }
@@ -57,11 +60,12 @@ public class Idleitem {
     public void setNote(String note) {
         this.note = note;
     }
-    public int getImagenum() {
-        return imagenum;
+    public String getImagePaths() {
+        return imagePaths;
     }
-    public void setImagenum(int imagenum) {
-        this.imagenum = imagenum;
+    public void setImagePaths(String imagePaths) {
+        this.imagePaths = imagePaths;
     }
+    
     
 }

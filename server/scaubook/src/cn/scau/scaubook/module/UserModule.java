@@ -1,14 +1,11 @@
 package cn.scau.scaubook.module;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
-import org.nutz.lang.Strings;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.annotation.At;
@@ -22,7 +19,7 @@ import cn.scau.scaubook.entity.User;
  */
 @IocBean
 @At("/usr")
-public class UserModule implements UserModuleApi{
+public class UserModule extends BaseModule implements UserModuleApi{
     
     private static final Log log = Logs.get();
     
@@ -81,7 +78,12 @@ public class UserModule implements UserModuleApi{
     @Override
     public BaseMessage login(String username, String password) {
         // TODO Auto-generated method stub
-        return null;
+        if(username != null && password != null){
+            User user = dao.fetch(User.class, Cnd.where("username","=",username).and("password", "=", password));
+            if(user != null)
+                return m("登录成功!", "user", user);
+        }
+        return mf("密码或账户不正确");
     }
 
     @Override

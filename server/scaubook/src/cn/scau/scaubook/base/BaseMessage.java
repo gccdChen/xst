@@ -82,7 +82,7 @@ public class BaseMessage {
     }
     public class CodeType{
         public static final int SUCCESS_CODE = 10;
-        public static final int FAIL_CODE = 101;
+        public static final int FAIL_CODE = 11;
     }
 }
 
