@@ -163,7 +163,7 @@ public final class CameraManager {
   }
 
   /**
-   * Convenience method for {@link com.szl.friendship.ui.UiScan}
+   * Convenience method for {@link cn.scau.zzzd.xst.ui.UiScan}
    */
   public synchronized void setTorch(boolean newSetting) {
     if (newSetting != configManager.getTorchState(camera)) {

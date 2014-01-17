@@ -112,12 +112,12 @@ public final class C {
 			/**
 			 * 注册的动作
 			 */
-			public static final String ACTION_NAME_UI_CHANGE="com.szl.friendship.ui.CHANGE";
+			public static final String ACTION_NAME_UI_CHANGE="cn.scau.zzzd.xst.ui.CHANGE";
 		}
 	}
 	
 	public static final class packname {
-		public static final String packpath			= "com.szl.friendship";
+		public static final String packpath			= "cn.scau.zzzd.xst";
 	}
 	
 	public static final class Model{
@@ -177,7 +177,7 @@ public final class C {
 	}
 	
 	public static final String SEPARATOR = "_";
-	public static final String ACTION_CLEAR_BROADCAST = "com.szl.friendship.clear.content";
+	public static final String ACTION_CLEAR_BROADCAST = "cn.scau.zzzd.xst.clear.content";
 	
 	/**
 	 *	服务端,响应码 

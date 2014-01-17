@@ -578,7 +578,7 @@ public abstract class BaseUi extends Activity implements AppMode{
 		if(preferences != null)
 			return preferences;
 		try {
-			sharedContext = createPackageContext("com.szl.friendship",Context.CONTEXT_IGNORE_SECURITY);
+			sharedContext = createPackageContext("cn.scau.zzzd.xst",Context.CONTEXT_IGNORE_SECURITY);
 			preferences = sharedContext.getSharedPreferences(C.CONFIGKEY.NAME,Context.MODE_WORLD_READABLE);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block

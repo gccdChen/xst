@@ -87,7 +87,6 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 	private InactivityTimer inactivityTimer;
 	private BeepManager beepManager;
 	
-	private long article_id = 0L;
 	public ViewfinderView getViewfinderView() {
 		return viewfinderView;
 	}
@@ -108,9 +107,6 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.ui_scan);
 
-		Intent intent = getIntent();
-		article_id = intent.getLongExtra(C.PARAMS.ARTICLE_ID, 0L);
-		
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		beepManager = new BeepManager(this);
@@ -355,8 +351,9 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 			ResultHandler resultHandler, Bitmap barcode) {
 		cameraManager.stopPreview();
 		// result
-		/*CharSequence displayContents = resultHandler.getDisplayContents();
-		Log.i("UiScan", "displayContents:" + displayContents);
+		CharSequence displayContents = resultHandler.getDisplayContents();
+		toast(displayContents.toString());
+		/*Log.i("UiScan", "displayContents:" + displayContents);
 		long result = -1;
 		try{
 			result = Long.parseLong(""+displayContents);
