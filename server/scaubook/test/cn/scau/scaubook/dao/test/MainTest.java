@@ -23,5 +23,9 @@ public class MainTest {
 //        list.put("data4",new Book());
 //        System.out.println(Json.toJson(list));
 //        System.out.println(System.currentTimeMillis());
+        Map<String, String> m = new HashMap<String, String>();
+        m.put("name", "heell");
+        m.put("nameworkd", "he123ell");
+        System.out.println(Json.toJson(m));
     }
 }

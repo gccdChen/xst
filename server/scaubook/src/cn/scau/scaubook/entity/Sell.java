@@ -12,8 +12,8 @@ import org.nutz.dao.entity.annotation.Table;
  * @author gccd
  *
  */
-@Table("t_idlesell")
-public class IdleSell {
+@Table("t_sell")
+public class Sell {
     @Id
     private long id;
     private long sellerid;
@@ -35,11 +35,20 @@ public class IdleSell {
      */
     @ColDefine(width = 13)
     private long createtime;
-    private List<Idleitem> idleitems;
+    private List<Sellitem> idleitems;
     /**
-     * 0不打包 1打包
+     * 可以是视频介绍
      */
-    private int isPackage = 0;
+    private String introduce;
+    /**
+     * 图片介绍
+     */
+    private String imgintro;
+    /**
+     * 文字介绍
+     * @return
+     */
+    private String strintro;
     public long getId() {
         return id;
     }
@@ -82,10 +91,10 @@ public class IdleSell {
     public void setCreatetime(long createtime) {
         this.createtime = createtime;
     }
-    public List<Idleitem> getIdleitems() {
+    public List<Sellitem> getIdleitems() {
         return idleitems;
     }
-    public void setIdleitems(List<Idleitem> idleitems) {
+    public void setIdleitems(List<Sellitem> idleitems) {
         this.idleitems = idleitems;
     }
     public float getPrice() {
@@ -93,6 +102,24 @@ public class IdleSell {
     }
     public void setPrice(float price) {
         this.price = price;
+    }
+    public String getIntroduce() {
+        return introduce;
+    }
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+    public String getImgintro() {
+        return imgintro;
+    }
+    public void setImgintro(String imgintro) {
+        this.imgintro = imgintro;
+    }
+    public String getStrintro() {
+        return strintro;
+    }
+    public void setStrintro(String strintro) {
+        this.strintro = strintro;
     }
     
 }

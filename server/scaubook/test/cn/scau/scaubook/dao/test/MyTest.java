@@ -14,7 +14,7 @@ import org.nutz.json.Json;
 import cn.scau.scaubook.entity.Book;
 import cn.scau.scaubook.entity.College;
 import cn.scau.scaubook.entity.Course;
-import cn.scau.scaubook.entity.Idleitem;
+import cn.scau.scaubook.entity.Sellitem;
 import cn.scau.scaubook.entity.Major;
 import cn.scau.scaubook.entity.Rating;
 import cn.scau.scaubook.entity.School;
@@ -37,7 +37,7 @@ public class MyTest {
         dao.create(Student.class, true);
         dao.create(User.class, true);
         dao.create(Course.class, true);
-        dao.create(Idleitem.class, true);
+        dao.create(Sellitem.class, true);
     }
     @After
     public void after(){
