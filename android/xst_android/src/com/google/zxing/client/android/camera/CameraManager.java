@@ -215,13 +215,14 @@ public final class CameraManager {
       int width,height = 0;
       if(screenResolution.x >screenResolution.y){
 	      width = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
-	      height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
+//	      height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
       }else{
     	  width = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_WIDTH, MAX_FRAME_WIDTH);
-	      height = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
+//	      height = findDesiredDimensionInRange(screenResolution.x, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
       }
+      height = width*2/3;
       int leftOffset = (screenResolution.x - width) / 2;
-      int topOffset = (screenResolution.y - height) / 2;
+      int topOffset = (screenResolution.y - height) / 8;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
       Log.d(TAG, "Calculated framing rect: " + framingRect);
     }

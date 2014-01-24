@@ -56,7 +56,7 @@ public class BaseHandler extends Handler {
 				case BaseTask.NETWORK_ERROR:
 					ui.hideLoadBar();
 					taskId = msg.getData().getInt("task");
-					//ui.onNetworkError(taskId);
+					ui.onNetworkError(taskId);
 					break;
 				case BaseTask.SHOW_LOADBAR:
 					ui.showLoadBar();

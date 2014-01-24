@@ -524,7 +524,7 @@ public abstract class BaseUi extends Activity implements AppMode{
 	}
 	
 	public void onNetworkError(int taskId) {
-		//toast(C.err.network);
+		toast(C.err.network);
 	}
 
 	//btn

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.gccd.json.Json;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +85,16 @@ public class JsonUtil {
 			e.printStackTrace();
 		}
 		return modelObj;
+	}
+	public static BaseModel json2model(Class modelClass,JSONObject modelJsonObject) {
+		// auto-load model class
+		BaseModel modelObj = null;
+		modelObj = Json.fromJson(modelClass, modelJsonObject.toString());
+		return modelObj;
+	}
+	public static <T> List<T> json2models(Class<T> modelClass,JSONArray modelJsonArray) {
+		List<T> baseModels = Json.fromJsonAsList(modelClass, modelJsonArray.toString());
+		return baseModels;
 	}
 	public static <T> List<T> json2models(String modelClassName,JSONArray modelJsonArray) {
 		List<T> list = new ArrayList<T>();

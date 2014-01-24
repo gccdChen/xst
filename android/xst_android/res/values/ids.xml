@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- request -->
+	<item type="id" name="request_uiscan"/>
+	<item type="id" name="request_uimajorbook"/>
+    
+	<!-- task -->
+	<item type="id" name="task_scan"/>
+	<item type="id" name="task_sell"/>
+	
+</resources>

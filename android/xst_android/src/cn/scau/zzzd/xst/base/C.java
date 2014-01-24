@@ -1,5 +1,6 @@
 package cn.scau.zzzd.xst.base;
 
+import cn.scau.zzzd.xst.R;
 import android.os.Environment;
 /**
  * 常量类
@@ -24,23 +25,11 @@ public final class C {
 	 * 接口url 
 	 */
 	public static final class api {
-		public static final String base				= "http://szltech.f3322.org:2080/Sodality/phone";
-//		public static final String base				= "http://192.168.0.80:8080/Sodality/phone";
-		public static final String login				= "/user-login.action";
-		public static final String list				= "/article-list.action";
-		public static final String applylist				= "/user-activity!getApplyList.action";
-		public static final String partlist				= "/user-activity!getParticipateList.action";
-		public static final String detail		= "/article-details.action";
-		public static final String getCode			= "/user-verification!getcode.action";
-		public static final String verifyCode		= "/user-verification!verifyCode.action";
-		public static final String updateInfo		= "/user-update!information.action";
-		public static final String signin		= "/article-signin.action";
-		public static final String modifypsw		= "/user-update!password.action";
-		public static final String apply			="/article-apply.action";
-		public static final String cancelapply			="/article-apply!cancel.action";
-		public static final String getCount 	= "/user-activity!getCount.action";
+		public static final String base				= "http://192.168.1.100:8080/scaubook";
+		public static final String scan 			= "/book/scan";
+		public static final String sell 				= "/sell/sell";
 		
-		public static final String img		= "http://szltech.f3322.org:2080/Sodality/articleImg/";
+		public static final String img				= "http://szltech.f3322.org:2080/Sodality/articleImg/";
 	}
 	
 	public static final String getFullApi(String api){
@@ -50,52 +39,8 @@ public final class C {
 	 *	task 标识 
 	 */
 	public static final class task {
-		public static final int index						= 1001;
-		
-		public static final int getCode						= 1002;
-		public static final int verifyCode						= 1003;
-		public static final int updateInfo						= 1004;
-		
-		public static final int setPassword 				= 1005;
-		public static final int login 				= 1006;
-		public static final int signin 				= 1009;
-		public static final int detail 				= 1010;
-		
-		public static final int search						= 2001;
-		
-		
-		public static final int listupdate		= 9000;
-		public static final int listupdate1		= 9001;
-		public static final int listupdate2		= 9002;
-		public static final int listupdate3		= 9003;
-		public static final int listupdate4		= 9004;
-		public static final int listupdate5		= 9005;
-		public static final int listupdate6		= 9006;
-		public static final int listupdate7		= 9007;
-		public static final int listupdate8		= 9008;
-		public static final int listLoadmore		= 3000;
-		public static final int listGalleryUpdate		= 5004;
-		public static final int listInfoUpdate			= 5005;
-		public static final int listActivityUpdate			= 5002;
-		public static final int listActivityLoadMore		= 5003;
-		public static final int modifyPsw						=5006;
-		public static final int signup							=5007;
-		public static final int unsignup							=5008;
-		public static final int useurlinfo							=5009;
-		
-		public static final int listapplyactupdate		= 2500;
-		public static final int listapplyactloadmore		= 2501;
-		public static final int listpartactupdate		= 2502;
-		public static final int listpartactloadmore		= 2503;
-		
-
-		public static final int detailcheck = 2030;
-
-		public static final int listInfoLoadMore = 3021;
-
-		public static final int searchloadmore = 3002;
-
-		public static final int getCount = 3001;
+		public static final int scan						= R.id.task_scan;
+		public static final int sell 						= R.id.task_sell;
 
 	}
 	/**
@@ -152,28 +97,8 @@ public final class C {
 	 *	网络数据参数 
 	 */
 	public static final class PARAMSNAME{
-		
-		//List
-		public static final String REFRESHTIME = "refreshTime";
-		public static final String KEYWORD	 = "key_word";
-		public static final String PHONE	 = "phone";
-		public static final String TYPE 	= "type";
-		public static final String PAGEINDEX = "pageIndex";
-		//verify
-		public static final String CARDNB 	= "cardNb";
-		public static final String NAME 	= "name";
-		public static final String VERIFYCODE 	= "verifycode";
-		public static final String PASSWORD 	= "password";
-		public static final String ISFORGET 	= "isforget";
-		public static final String USERNAME = "username";
-		//artcle
-		public static final String ARTICLE_ID = "articleId";
-		//use
-		public static final String UNIT  ="unit";
-		public static final String SEX  ="sex";
-		public static final String DUTY  ="duty";
-		public static final String NICKNAME="nickname";
-		public static final String UPDATETIME = "updatetime";
+		public static final String ISBN = "isbn";
+		public static final String SELLS = "sells";
 	}
 	
 	public static final String SEPARATOR = "_";
@@ -218,6 +143,7 @@ public final class C {
 		public static final String jsonFormat		= "消息格式错误";
 		public static final String other				= "其他错误";
 	}
+	public final static float DEFAULT_SELL_PRICE = 0.3f;
 	/**
 	 * 
 	 * @author zh_u_

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.gccd.json.Json;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,16 +24,16 @@ public class BaseMessage {
 	private String code;
 	private String message;
 	private String resultSrc;
-	private Map<String, BaseModel> resultMap;
-	private Map<String, ArrayList<? extends BaseModel>> resultList;
+	private Map<Class, BaseModel> resultMap;
+	private Map<Class, ArrayList<? extends BaseModel>> resultList;
 
 	public boolean issuccess(){
-		return code.equals("0");
+		return code.equals("10");
 	}
 	
 	public BaseMessage() {
-		this.resultMap = new HashMap<String, BaseModel>();
-		this.resultList = new HashMap<String, ArrayList<? extends BaseModel>>();
+		this.resultMap = new HashMap<Class, BaseModel>();
+		this.resultList = new HashMap<Class, ArrayList<? extends BaseModel>>();
 	}
 	private String jsonStr;
 	public String getJsonStr(){
@@ -46,8 +47,8 @@ public class BaseMessage {
 		try {
 			jsonObject = new JSONObject(jsonStr);
 			if (jsonObject != null) {
-				message.setCode(""+jsonObject.getInt("status_code"));
-				message.setMessage(jsonObject.getString("description"));
+				message.setCode(""+jsonObject.getInt("code"));
+				message.setMessage(jsonObject.getString("des"));
 				if(jsonObject.has("data")){
 					message.setResult(jsonObject.getString("data"));
 				}else{
@@ -94,8 +95,8 @@ public class BaseMessage {
 	 * @return
 	 * @throws Exception
 	 */
-	public Object getResult(String modelName) throws Exception{
-		Object model = this.resultMap.get(modelName);
+	public BaseModel getResult(Class modelClass) throws Exception{
+		BaseModel model = this.resultMap.get(modelClass);
 		// catch null exception
 		if (model == null) {
 			Log.i("getResult", "null");
@@ -115,6 +116,10 @@ public class BaseMessage {
 	}
 
 	/**
+	 * i don't know how 'Class.forName(String name)' expend. so store in a hashMap 
+	 */
+	private static Map<String, Class> clazzMap = new HashMap<String, Class>();
+	/**
 	 * 
 	 * @param result
 	 *            json like { "user":[{"acount":"admin"},{"acount":"user"}]
@@ -123,7 +128,7 @@ public class BaseMessage {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public void setResult(String result) throws Exception {
+	public void setResult(String result) throws ClassNotFoundException,Exception {
 		this.resultSrc = result;
 		if (result.length() > 0) {
 			JSONObject jsonObject = null;
@@ -133,25 +138,22 @@ public class BaseMessage {
 				// initialize
 				String jsonKey = it.next();
 				String modelName = getModelName(jsonKey);
-				String modelClassName = C.packname.packpath + ".model."+ modelName;
+				String modelClassName = C.packname.packpath + ".entity."+ modelName;
+				
+				Class bm = clazzMap.get(modelClassName);
+				if(bm == null){
+					bm = (Class) Class.forName(modelClassName);
+					if(bm != null)
+						clazzMap.put(modelClassName, bm);
+				}
 				JSONArray modelJsonArray = jsonObject.optJSONArray(jsonKey);
-				// JSONObject
-				if (modelJsonArray == null) {
-					JSONObject modelJsonObject = jsonObject
-							.optJSONObject(jsonKey);
-					if (modelJsonObject == null) {
-						throw new Exception("Message result is invalid");
-					}
-					this.resultMap.put(modelName,JsonUtil.json2model(modelClassName, modelJsonObject));
-					// JSONArray
-				} else {
-					ArrayList<BaseModel> modelList = new ArrayList<BaseModel>();
-					for (int i = 0; i < modelJsonArray.length(); i++) {
-						JSONObject modelJsonObject = modelJsonArray
-								.optJSONObject(i);
-						modelList.add(JsonUtil.json2model(modelClassName,modelJsonObject));
-					}
-					this.resultList.put(modelName, modelList);
+				
+				if (modelJsonArray == null) { // JSONObject
+					JSONObject modelJsonObject = jsonObject.optJSONObject(jsonKey);
+					this.resultMap.put(bm,JsonUtil.json2model(bm, modelJsonObject));
+				} else {	// JSONArray
+					ArrayList<BaseModel> modelList = (ArrayList<BaseModel>) JsonUtil.json2models(bm,modelJsonArray);
+					this.resultList.put(bm, modelList);
 				}
 			}
 		}

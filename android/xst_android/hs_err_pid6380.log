@@ -1,0 +1,87 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+#  Internal Error (classFileParser.cpp:2923), pid=6380, tid=5680
+#  Error: ShouldNotReachHere()
+#
+# Java VM: Java HotSpot(TM) Client VM (11.2-b01 mixed mode windows-x86)
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00207400):  JavaThread "Unknown thread" [_thread_in_vm, id=5680, stack(0x00210000,0x00260000)]
+
+Stack: [0x00210000,0x00260000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00207400 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=5680, stack(0x00210000,0x00260000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\Program Files (x86)\Java\jre6\bin\javaw.exe
+0x77850000 - 0x779d0000 	C:\Windows\SysWOW64\ntdll.dll
+0x77070000 - 0x77170000 	C:\Windows\syswow64\kernel32.dll
+0x75150000 - 0x75196000 	C:\Windows\syswow64\KERNELBASE.dll
+0x76fd0000 - 0x77070000 	C:\Windows\syswow64\ADVAPI32.dll
+0x75620000 - 0x756cc000 	C:\Windows\syswow64\msvcrt.dll
+0x76fb0000 - 0x76fc9000 	C:\Windows\SysWOW64\sechost.dll
+0x75300000 - 0x753f0000 	C:\Windows\syswow64\RPCRT4.dll
+0x74f30000 - 0x74f90000 	C:\Windows\syswow64\SspiCli.dll
+0x74f20000 - 0x74f2c000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x75050000 - 0x75150000 	C:\Windows\syswow64\USER32.dll
+0x75ca0000 - 0x75d30000 	C:\Windows\syswow64\GDI32.dll
+0x77820000 - 0x7782a000 	C:\Windows\syswow64\LPK.dll
+0x75d30000 - 0x75dcd000 	C:\Windows\syswow64\USP10.dll
+0x75840000 - 0x758a0000 	C:\Windows\system32\IMM32.DLL
+0x75dd0000 - 0x75e9c000 	C:\Windows\syswow64\MSCTF.dll
+0x71ee0000 - 0x71f15000 	C:\Windows\SysWOW64\nvinit.dll
+0x7c340000 - 0x7c396000 	C:\Program Files (x86)\Java\jre6\bin\msvcr71.dll
+0x6d800000 - 0x6da56000 	C:\Program Files (x86)\Java\jre6\bin\client\jvm.dll
+0x751a0000 - 0x751d2000 	C:\Windows\syswow64\WINMM.dll
+0x728e0000 - 0x7292b000 	C:\Windows\system32\apphelp.dll
+0x6d290000 - 0x6d298000 	C:\Program Files (x86)\Java\jre6\bin\hpi.dll
+0x75610000 - 0x75615000 	C:\Windows\syswow64\PSAPI.DLL
+0x6d7b0000 - 0x6d7bc000 	C:\Program Files (x86)\Java\jre6\bin\verify.dll
+0x6d330000 - 0x6d34f000 	C:\Program Files (x86)\Java\jre6\bin\java.dll
+0x6d7f0000 - 0x6d7ff000 	C:\Program Files (x86)\Java\jre6\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=utf8 -Xbootclasspath:F:\adt\sdk\platforms\android-19\android.jar 
+java_command: cn.scau.zzzd.xst.entity.Book
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.6.0_45
+CLASSPATH=.;C:\Program Files\Java\jdk1.6.0_45\lib\dt.jar;C:\Program Files\Java\jdk1.6.0_45\lib\tools.jar;
+PATH=C:/Program Files/Java/jdk1.6.0_45/bin/../jre/bin/server;C:/Program Files/Java/jdk1.6.0_45/bin/../jre/bin;C:/Program Files/Java/jdk1.6.0_45/bin/../jre/lib/amd64;F:\adt\sdk\tools;C:\Python27;C:\Program Files (x86)\WANdisco\uberSVN\bin;C:\Program Files (x86)\Common Files\NetSarang;C:\Program Files\Java\jdk1.6.0_45\bin;C:\Program Files\Java\jdk1.6.0_45\jre\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files (x86)\MySQL\MySQL Server 5.0\bin;F:\±à³Ì\build\apache-ant-1.9.2\bin;C:\Program Files (x86)\Microsoft SQL Server\90\Tools\binn\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;F:\program\doxygen\bin;F:\adt\eclipse;
+USERNAME=gccd
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows NT 6.1 Build 7600 
+
+CPU:total 8 (8 cores per cpu, 2 threads per core) family 6 model 10 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, ht
+
+Memory: 4k page, physical 4073836k(930016k free), swap 4194303k(3666772k free)
+
+vm_info: Java HotSpot(TM) Client VM (11.2-b01) for windows-x86 JRE (1.6.0_12-b04), built on Jan 17 2009 09:57:14 by "java_re" with MS VC++ 7.1
+
+time: Fri Jan 17 16:00:24 2014
+elapsed time: 0 seconds
+

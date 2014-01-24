@@ -17,12 +17,14 @@
 package cn.scau.zzzd.xst.ui;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -32,14 +34,20 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import cn.scau.zzzd.xst.R;
 import cn.scau.zzzd.xst.base.BaseMessage;
 import cn.scau.zzzd.xst.base.BaseUi;
 import cn.scau.zzzd.xst.base.C;
+import cn.scau.zzzd.xst.entity.Book;
 import cn.scau.zzzd.xst.widget.zxing.BeepManager;
 import cn.scau.zzzd.xst.widget.zxing.CaptureActivityHandler;
 import cn.scau.zzzd.xst.widget.zxing.DecodeFormatManager;
@@ -57,15 +65,6 @@ import com.google.zxing.client.android.camera.CameraManager;
 import com.google.zxing.client.android.result.ResultHandler;
 import com.google.zxing.client.android.result.ResultHandlerFactory;
 
-/**
- * This activity opens the camera and does the actual scanning on a background
- * thread. It draws a viewfinder to help the user place the barcode correctly,
- * shows feedback as the image processing is happening, and then overlays the
- * results when a scan is successful.
- * 
- * @author dswitkin@google.com (Daniel Switkin)
- * @author Sean Owen
- */
 public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 
 	private static final String TAG = UiScan.class.getSimpleName();
@@ -78,9 +77,7 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 	private CaptureActivityHandler handler;
 	private Result savedResultToShow;
 	private ViewfinderView viewfinderView;
-	private Result lastResult;
 	private boolean hasSurface;
-	private boolean copyToClipboard;
 	private Collection<BarcodeFormat> decodeFormats;
 	private Map<DecodeHintType, ?> decodeHints;
 	private String characterSet;
@@ -110,26 +107,21 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		beepManager = new BeepManager(this);
+		init();
+		initData();
+		update();
 	}
 	SurfaceView surfaceView = null;
 	@Override
 	protected void onResume() {
 		super.onResume();
 		surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-		// CameraManager must be initialized here, not in onCreate(). This is
-		// necessary because we don't
-		// want to open the camera driver and measure the screen size if we're
-		// going to show the help on
-		// first launch. That led to bugs where the scanning rectangle was the
-		// wrong size and partially
-		// off screen.
 		cameraManager = new CameraManager(getApplication());
 
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		viewfinderView.setCameraManager(cameraManager);
 
 		handler = null;
-		lastResult = null;
 
 		resetStatusView();
 		
@@ -156,35 +148,7 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 
 		if (intent != null) {
 
-			String action = intent.getAction();
-
-			if (Intents.Scan.ACTION.equals(action)) {
-
-				// Scan the formats the intent requested, and return the result
-				// to the calling activity.
-				// source = IntentSource.NATIVE_APP_INTENT;
-				decodeFormats = DecodeFormatManager.parseDecodeFormats(intent);
-				decodeHints = DecodeHintManager.parseDecodeHints(intent);
-
-				if (intent.hasExtra(Intents.Scan.WIDTH)
-						&& intent.hasExtra(Intents.Scan.HEIGHT)) {
-					int width = intent.getIntExtra(Intents.Scan.WIDTH, 0);
-					int height = intent.getIntExtra(Intents.Scan.HEIGHT, 0);
-					if (width > 0 && height > 0) {
-						cameraManager.setManualFramingRect(width, height);
-					}
-				}
-
-				String customPromptMessage = intent
-						.getStringExtra(Intents.Scan.PROMPT_MESSAGE);
-				if (customPromptMessage != null) {
-					// statusView.setText(customPromptMessage);
-					toast(customPromptMessage);
-				}
-			} 
-
 			characterSet = intent.getStringExtra(Intents.Scan.CHARACTER_SET);
-
 		}
 	}
 
@@ -282,10 +246,24 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 	 */
 	public void handleDecode(Result rawResult, Bitmap barcode, float scaleFactor) {
 		inactivityTimer.onActivity();
-		lastResult = rawResult;
 		ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(
 				this, rawResult);
 
+		CharSequence displayContents = resultHandler.getDisplayContents();
+		String result = displayContents.toString().trim();
+		Book b= null;
+		boolean has = false;
+		for(int i =0 ;i<books.size();i++){
+			b = books.get(i);
+			if(b.getIsbn13().equals(result)){
+				has = true;
+				break;
+			}
+		}
+		if(has){
+			handler.sendEmptyMessage(R.id.restart_preview);
+			return ;
+		}
 		boolean fromLiveScan = barcode != null;
 		if (fromLiveScan) {
 			// historyManager.addHistoryItem(rawResult, resultHandler);
@@ -352,122 +330,34 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 		cameraManager.stopPreview();
 		// result
 		CharSequence displayContents = resultHandler.getDisplayContents();
-		toast(displayContents.toString());
-		/*Log.i("UiScan", "displayContents:" + displayContents);
-		long result = -1;
-		try{
-			result = Long.parseLong(""+displayContents);
-			if(result != article_id){
-				showWrongPlace();
-				return ;
-			}
-		}catch(Exception e){
-			showWrongPlace();
-			return ;
-		}
-		
-		User user  = getUser();
-		if(checkContents(user.phone,displayContents)){
-			Map<String, String> taskArgs = new HashMap<String, String>();
-			taskArgs.put(C.PARAMSNAME.PHONE, user.phone);
-			taskArgs.put(C.PARAMSNAME.ARTICLE_ID, ""+article_id);
-			doTaskAsync(C.task.signin, C.api.signin, taskArgs);
-		}*/
+		String result = displayContents.toString().trim();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(C.PARAMSNAME.ISBN, result);
+		doTaskAsync(C.task.scan,C.api.scan,params);
 	}
-//dialog
-//	private void showWrongPlace() {
-//		// TODO Auto-generated method stub
-//		AlertDialog alertDialog =new AlertDialog.Builder(this)
-//		.setMessage(R.string.err_place)
-//		.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				// TODO Auto-generated method stub
-//				restartPreviewAfterDelay(0L);
-//			}
-//		})
-//		.create();
-//		alertDialog.show();
-//	}
 
 	@Override
 	public void onTaskComplete(int taskId, BaseMessage message) {
 		// TODO Auto-generated method stub
 		super.onTaskComplete(taskId, message);
 		switch (taskId) {
-		case C.task.signin:
-			if(message.issuccess()){
-				toast(message.getMessage());
-				setResult(RESULT_OK);
-				finish();
-			}else{//失败则提示
-				AlertDialog alertDialog = new AlertDialog.Builder(this)
-				.setMessage(message.getMessage())
-				.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						restartPreviewAfterDelay(0L);
+			case C.task.scan:
+				if(message.issuccess()){
+					try {
+						Book book = (Book) message.getResult(Book.class);
+//						toast(book.toString());
+						add(book);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				}).create();
-				alertDialog.show();
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	private boolean checkContents(String phone,CharSequence displayContents) {
-		// TODO Auto-generated method stub
-		
-		return true;
-	}
-
-	// Briefly show the contents of the barcode, then handle the result outside
-	// Barcode Scanner.
-	private void handleDecodeExternally(Result rawResult,
-			ResultHandler resultHandler, Bitmap barcode) {
-
-		if (barcode != null) {
-			viewfinderView.drawResultBitmap(barcode);
-		}
-
-		long resultDurationMS;
-		if (getIntent() == null) {
-			resultDurationMS = DEFAULT_INTENT_RESULT_DURATION_MS;
-		} else {
-			resultDurationMS = getIntent().getLongExtra(
-					Intents.Scan.RESULT_DISPLAY_DURATION_MS,
-					DEFAULT_INTENT_RESULT_DURATION_MS);
-		}
-
-		if (resultDurationMS > 0) {
-			String rawResultString = String.valueOf(rawResult);
-			if (rawResultString.length() > 32) {
-				rawResultString = rawResultString.substring(0, 32) + " ...";
-			}
-			toast(getString(resultHandler.getDisplayTitle()) + " : "
-					+ rawResultString);
-			// statusView.setText();
-		}
-
-		if (copyToClipboard && !resultHandler.areContentsSecure()) {
-			CharSequence text = resultHandler.getDisplayContents();
-			// ClipboardInterface.setText(text, this);
-		}
-	}
-
-	private void sendReplyMessage(int id, Object arg, long delayMS) {
-		if (handler != null) {
-			Message message = Message.obtain(handler, id, arg);
-			if (delayMS > 0L) {
-				handler.sendMessageDelayed(message, delayMS);
-			} else {
-				handler.sendMessage(message);
-			}
+				}else{//失败则提示
+					toast(message.getMessage());
+				}
+				restartPreviewAfterDelay(200L);
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -518,20 +408,53 @@ public final class UiScan extends BaseUi implements SurfaceHolder.Callback {
 
 	private void resetStatusView() {
 		cameraManager.startPreview();
-		lastResult = null;
 	}
 
 	public void drawViewfinder() {
 		viewfinderView.drawViewfinder();
 	}
 
+	private LinearLayout ll_content = null;
+	private List<Book> books = new ArrayList<Book>();
+	private LayoutInflater inflater = null;
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
+		inflater = LayoutInflater.from(this);
+		ll_content = (LinearLayout) findViewById(R.id.ll_content);
 	}
 
+	private void add(final Book book){
+		books.add(book);
+		View v = inflater.inflate(R.layout.item_scan, null);
+		CheckBox cb_book = (CheckBox) v.findViewById(R.id.cb_book);
+		cb_book.setText(book.getTitle());
+		cb_book.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				book.setSel(isChecked);
+			}
+		});
+		ll_content.addView(v);
+	}
+	
 	@Override
 	protected void update() {
 		// TODO Auto-generated method stub
+	}
+	
+	public void doSure(View view){
+		Intent data = new Intent();
+		Book book = null;
+		for (int i = 0; i < books.size(); i++) {
+			book = books.get(i);
+			if(book== null || !book.isSel())
+				books.remove(i--);
+		}
+		data.putExtra("books", (Serializable)books);
+		setResult(RESULT_OK,data);
+		finish();
 	}
 }

@@ -37,18 +37,18 @@
         android:theme="@style/AppTheme"
         android:name="cn.scau.zzzd.xst.base.BaseApp" >
         <activity
-            android:name="cn.scau.zzzd.xst.ui.UiScan"
+            android:name="cn.scau.zzzd.xst.ui.UiSell"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
-            android:name="cn.scau.zzzd.xst.ui.reg.UiReg">
-        </activity>
+        <activity android:name="cn.scau.zzzd.xst.ui.UiLogin"/>
+        <activity android:name="cn.scau.zzzd.xst.ui.UiMajorBook"/>
+        <activity android:name="cn.scau.zzzd.xst.ui.UiScan"/>
+        <activity android:name="cn.scau.zzzd.xst.ui.reg.UiReg"/>
     </application>
 
 </manifest>
