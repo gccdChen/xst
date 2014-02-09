@@ -15,7 +15,7 @@
         android:paddingTop="10dp" >
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/rg_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:layout_alignParentTop="true" 
@@ -46,13 +46,14 @@
                 android:layout_height="wrap_content"
                   android:textColor="#000"
                 android:text="2013" />
+
         </RadioGroup>
 
         <Spinner
             android:id="@+id/sp_school"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radioGroup1" 
+            android:layout_below="@+id/rg_grade" 
             />
 
         <Spinner
@@ -77,9 +78,10 @@
 
             <Button
                 android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="next"
+                style="@style/SendBtn"
                 android:text="下一步" />
         </LinearLayout>
     </RelativeLayout>

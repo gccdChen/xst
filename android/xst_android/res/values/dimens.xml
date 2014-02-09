@@ -13,4 +13,7 @@
     <dimen name="normal_bar_height">25dp</dimen>
     <dimen name="bottom_bar_coin_height">30dp</dimen>
     <dimen name="detail_bar_bottom">50dp</dimen>
+    
+    <!-- btn_radius -->
+    <dimen name="btn_radius">5dp</dimen>
 </resources>

@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
@@ -18,7 +18,6 @@
             android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:ems="10"
             android:hint="建议使用学号作为用户名"
@@ -27,29 +26,15 @@
         </EditText>
 
         <EditText
-            android:id="@+id/et_phone"
+            android:id="@+id/et_phone1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_username"
+            android:inputType="phone"
             android:ems="10"
             android:hint="手机号"
+            android:layout_below="@+id/et_username"
             android:paddingLeft="10dp"
             android:paddingRight="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_phone"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="next"
-                android:text="下一步" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/btn_clear1"
@@ -65,11 +50,56 @@
             android:id="@+id/btn_clear2"
             android:layout_width="23dp"
             android:layout_height="23dp"
-            android:layout_alignBaseline="@+id/et_phone"
-            android:layout_alignBottom="@+id/et_phone"
+            android:layout_alignBaseline="@+id/et_phone1"
+            android:layout_alignBottom="@+id/et_phone1"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/close_normal" />
+
+        <EditText
+            android:id="@+id/et_vertify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/et_phone1"
+            android:layout_toLeftOf="@+id/btn_sendsms"
+            android:ems="5"
+            android:hint="验证码" >
+        </EditText>
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/et_vertify"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SendBtn"
+                android:onClick="next"
+                android:text="下一步" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_sendsms"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/et_vertify"
+            android:layout_alignBottom="@+id/et_vertify"
+            android:layout_below="@+id/et_phone1"
+            android:onClick="getVertify"
+            style="@style/SendBtn"
+            android:background="@drawable/selector_btn_yellow"
+            android:layout_marginTop="0dp"
+            android:textSize="14sp"
+            android:text="发送短信" />
+
     </RelativeLayout>
 
 </LinearLayout>

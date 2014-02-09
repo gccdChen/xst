@@ -43,11 +43,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="okssell"
             android:text="一键卖书"/>
         <Button 
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="okssearch"
             android:text="一键搜书"/>
     </LinearLayout>
 	<ListView 

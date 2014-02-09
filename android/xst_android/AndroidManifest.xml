@@ -45,10 +45,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cn.scau.zzzd.xst.ui.UiLogin"/>
+        <activity android:name="cn.scau.zzzd.xst.ui.UiLogin">
+		</activity>
         <activity android:name="cn.scau.zzzd.xst.ui.UiMajorBook"/>
         <activity android:name="cn.scau.zzzd.xst.ui.UiScan"/>
-        <activity android:name="cn.scau.zzzd.xst.ui.reg.UiReg"/>
+        <activity android:name="cn.scau.zzzd.xst.ui.reg.UiReg">
+		</activity>
     </application>
 
 </manifest>

@@ -25,9 +25,15 @@ public final class C {
 	 * 接口url 
 	 */
 	public static final class api {
-		public static final String base				= "http://192.168.1.100:8080/scaubook";
+//		public static final String base				= "http://192.168.1.100:8080/scaubook";
+		public static final String base				= "http://115.28.47.79:8080/scaubook";
+		public static final String login 			= "/usr/login";
+		public static final String getVertufy 			= "/usr/send_verifycode";
 		public static final String scan 			= "/book/scan";
 		public static final String sell 				= "/sell/sell";
+		public static final String signup1 				= "/usr/signup1";
+		public static final String signup2 				= "/usr/signup2";
+		public static final String signup3 				= "/usr/signup3";
 		
 		public static final String img				= "http://szltech.f3322.org:2080/Sodality/articleImg/";
 	}

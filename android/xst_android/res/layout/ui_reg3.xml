@@ -15,7 +15,7 @@
         android:paddingTop="10dp" >
 
         <EditText
-            android:id="@+id/et_username"
+            android:id="@+id/et_opassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -23,18 +23,20 @@
             android:ems="10"
             android:hint="输入密码"
             android:paddingLeft="5dp"
-            android:paddingRight="15dp" >
+            android:paddingRight="15dp" 
+            android:inputType="textPassword">
         </EditText>
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_username"
+            android:layout_below="@+id/et_opassword"
             android:ems="10"
             android:hint="再次输入密码"
             android:paddingLeft="5dp"
-            android:paddingRight="15dp" />
+            android:paddingRight="15dp" 
+            android:inputType="textPassword"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,9 +48,10 @@
 
             <Button
                 android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="next"
+                style="@style/SendBtn"
                 android:text="确认" />
         </LinearLayout>
 

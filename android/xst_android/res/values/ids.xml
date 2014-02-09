@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- request -->
+	<item type="id" name="request_login"/>
+	<item type="id" name="request_getvertify"/>
+	<item type="id" name="request_signup1"/>
+	<item type="id" name="request_signup2"/>
+	<item type="id" name="request_signup3"/>
+	<item type="id" name="request_search_major"/>
+	
+	<!-- request ui -->
 	<item type="id" name="request_uiscan"/>
 	<item type="id" name="request_uimajorbook"/>
     

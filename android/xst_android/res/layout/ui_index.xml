@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_launcher"
                 android:button="@null" 
-                android:text="首页"
+                android:text="会员"
                 android:gravity="bottom|center_horizontal" />
 
             <RadioButton
@@ -57,7 +57,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_launcher"
                 android:button="@null" 
-                android:text="首页"
+                android:text="卖书"
                 android:gravity="bottom|center_horizontal" />
 
             <RadioButton
@@ -67,7 +67,7 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_launcher"
                 android:button="@null"
-                android:text="首页"
+                android:text="设置"
                 android:gravity="bottom|center_horizontal" />
         </RadioGroup>
     </LinearLayout>

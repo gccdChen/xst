@@ -31,8 +31,9 @@
             android:id="@+id/sp_prices"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"/>
-
+            android:layout_alignLeft="@+id/checkBox1"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkBox1" />
 
         <CheckBox
             android:id="@+id/checkBox1"
@@ -41,13 +42,19 @@
             android:layout_alignTop="@+id/button2"
             android:layout_toRightOf="@+id/button2"
             android:text="打包出售" />
-        
-        <EditText 
-             android:layout_width="wrap_content"
+
+        <EditText
+            android:id="@+id/et_prices"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/checkBox1"
-            android:layout_toRightOf="@+id/button2"
-            android:id="@+id/et_prices"/>
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/checkBox1"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
     </RelativeLayout>
 
     <ListView

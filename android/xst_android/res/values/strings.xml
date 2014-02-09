@@ -12,4 +12,9 @@
     <string name="xlistview_header_last_time">更新于：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    
+    <!-- msg -->
+    <string name="msg_info_integrity_err">请填写完整的信息</string>
+    <string name="msg_pw_fotmat_err">密码格式为 [a-zA-Z_0-9] 长度为5-20</string>
+    <string name="msg_pw_unequals_err">请输入一样的密码</string>
 </resources>

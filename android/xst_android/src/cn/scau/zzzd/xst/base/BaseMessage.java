@@ -95,8 +95,8 @@ public class BaseMessage {
 	 * @return
 	 * @throws Exception
 	 */
-	public BaseModel getResult(Class modelClass) throws Exception{
-		BaseModel model = this.resultMap.get(modelClass);
+	public Object getResult(Class modelClass) throws Exception{
+		Object model = this.resultMap.get(modelClass);
 		// catch null exception
 		if (model == null) {
 			Log.i("getResult", "null");
