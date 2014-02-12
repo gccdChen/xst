@@ -35,7 +35,7 @@ public final class C {
 		public static final String signup2 				= "/usr/signup2";
 		public static final String signup3 				= "/usr/signup3";
 		
-		public static final String img				= "http://szltech.f3322.org:2080/Sodality/articleImg/";
+		public static final String search_major = "/major/search";
 	}
 	
 	public static final String getFullApi(String api){

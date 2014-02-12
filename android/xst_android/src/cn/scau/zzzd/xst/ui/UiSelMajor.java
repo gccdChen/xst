@@ -12,12 +12,13 @@ import cn.scau.zzzd.xst.R;
 import cn.scau.zzzd.xst.base.BaseUi;
 import cn.scau.zzzd.xst.base.C;
 import cn.scau.zzzd.xst.widget.xlistview.XListView;
+import cn.scau.zzzd.xst.widget.xlistview.XListView.IXListViewListener;
 /**
  * 选择专业
  * @author gccd
  *
  */
-public class UiSelMajor extends BaseUi{
+public class UiSelMajor extends BaseUi implements IXListViewListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,6 +46,10 @@ public class UiSelMajor extends BaseUi{
 	protected void initData() {
 		// TODO Auto-generated method stub
 		super.initData();
+		lv_content.setAdapter(adapter);
+		lv_content.setPullLoadEnable(true);
+		lv_content.setFooterDividersEnabled(false);
+		lv_content.setXListViewListener(this);
 		et_keyword.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -84,6 +89,18 @@ public class UiSelMajor extends BaseUi{
 
 	@Override
 	protected void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoadMore() {
 		// TODO Auto-generated method stub
 		
 	}
