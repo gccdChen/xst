@@ -23,7 +23,8 @@ public class MajorListAdapter extends BaseAdapter{
 	public MajorListAdapter(BaseUi baseUi, List<Major> majors) {
 		super();
 		this.baseUi = baseUi;
-		this.majors = majors;
+		if(majors != null)
+			this.majors = majors;
 		inflater = LayoutInflater.from(baseUi);
 	}
 
@@ -54,6 +55,12 @@ public class MajorListAdapter extends BaseAdapter{
 		TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
 		
 		return convertView;
+	}
+
+	public void update(List<Major> list) {
+		// TODO Auto-generated method stub
+		this.majors = list;
+		notifyDataSetChanged();
 	}
 
 }

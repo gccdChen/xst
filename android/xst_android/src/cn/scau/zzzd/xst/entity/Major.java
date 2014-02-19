@@ -1,11 +1,13 @@
 package cn.scau.zzzd.xst.entity;
 
+import cn.scau.zzzd.xst.base.BaseModel;
+
 /**
  * 
  * @author gccd
  *
  */
-public class Major {
+public class Major extends BaseModel{
     private long id;
     private String name;
     /**
